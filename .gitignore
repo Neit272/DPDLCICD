@@ -1,1 +1,3 @@
-data/datasets/
+data/datasets/*.json
+
+*.jsonl
