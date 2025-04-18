@@ -1,6 +1,5 @@
 import os
 import json
-from datetime import datetime
 from collections import Counter
 
 def build_vocab(file_paths, min_freq=1):
@@ -31,9 +30,8 @@ def save_vocab(vocab, path):
         json.dump(vocab, f, indent=4)
 
 if __name__ == "__main__":
-    today = datetime.now().strftime("%d-%m-%Y")
     base_path = "../preprocessed/token"
-    output_path = f"../preprocessed/vocab/vocab_{today}.json"
+    output_path = f"../preprocessed/vocab/vocab.json"
 
     train_file = os.path.join(base_path, "train.jsonl")
     val_file = os.path.join(base_path, "val.jsonl")
