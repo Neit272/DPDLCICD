@@ -40,8 +40,14 @@ def main():
             try:
                 obj = json.loads(line)
                 raw_code = obj.get("func", "")
-                obj["func"] = normalize_code(raw_code)
-                f_out.write(json.dumps(obj) + "\n")
+                
+                # Keep only func and label fields
+                cleaned_obj = {
+                    "func": normalize_code(raw_code),
+                    "target": obj.get("target", "")
+                }
+                
+                f_out.write(json.dumps(cleaned_obj) + "\n")
             except Exception as e:
                 print("Error:", e)
                 continue
