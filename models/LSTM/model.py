@@ -14,7 +14,7 @@ import pickle
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 ENCODED_DIR = os.path.join(ROOT_DIR, "data", "preprocessed", "encoded")
-VOCAB_PATH = os.path.join(ROOT_DIR, "data", "preprocessed", "vocab", "vocab4.json")
+VOCAB_PATH = os.path.join(ROOT_DIR, "data", "preprocessed", "vocab", "vocab.json")
 MODEL_DIR = os.path.join(ROOT_DIR, "models", "LSTM")
 os.makedirs(MODEL_DIR, exist_ok=True)
 

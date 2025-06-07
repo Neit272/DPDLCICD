@@ -3,7 +3,7 @@ import json
 import re
 from collections import Counter
 from tqdm import tqdm
-from tokenizer import (
+from data.processing.tokenizer import (
     CRITICAL_FUNCTIONS, C_KEYWORDS, C_TYPES, OPERATORS, 
     MEANINGFUL_IDENTIFIERS, is_complex_identifier, is_noise_token
 )
@@ -206,7 +206,7 @@ if __name__ == "__main__":
     coverage = validate_vocabulary_detailed(vocab, existing_files)
     
     # Save vocabulary
-    vocab_path = os.path.join(output_dir, "vocab4.json")
+    vocab_path = os.path.join(output_dir, "vocab.json")
     with open(vocab_path, 'w', encoding='utf-8') as f:
         json.dump(vocab, f, indent=2)
     
