@@ -3,7 +3,9 @@ import json
 import re
 from collections import Counter
 from tqdm import tqdm
-from data.processing.tokenizer import (
+
+# Import từ tokenizer2 thay vì tokenizer
+from tokenizer2 import (
     CRITICAL_FUNCTIONS, C_KEYWORDS, C_TYPES, OPERATORS, 
     MEANINGFUL_IDENTIFIERS, is_complex_identifier, is_noise_token
 )
@@ -99,11 +101,17 @@ def build_vocabulary(file_paths, min_freq=2, max_vocab_size=30000):
             idx += 1
             added_stats['other'] += 1
     
-    # 8. Normalized variables and functions
+    # 8. Normalized variables and functions (SEMANTIC TOKENS - PRIORITY!)
+    semantic_tokens = []
     for token, count in token_counter.most_common():
+        if token.startswith(('VAR_', 'FUNC_')) and count >= min_freq:
+            semantic_tokens.append((token, count))
+    
+    # Add semantic tokens with high priority
+    for token, count in semantic_tokens:
         if idx >= max_vocab_size:
             break
-        if token not in vocab and count >= min_freq:
+        if token not in vocab:
             if token.startswith('VAR_'):
                 vocab[token] = idx
                 idx += 1
@@ -140,7 +148,6 @@ def validate_vocabulary_detailed(vocab, file_paths):
     
     total_tokens = covered_tokens = 0
     unknown_counter = Counter()
-    category_coverage = {}
     
     for path in file_paths:
         with open(path, 'r', encoding='utf-8') as f:
@@ -166,11 +173,21 @@ def validate_vocabulary_detailed(vocab, file_paths):
     print(f"   Unknown: {len(unknown_counter):,} unique ({total_tokens - covered_tokens:,} total)")
     print(f"   Coverage: {coverage:.2%}")
     
+    # Show semantic token statistics
+    semantic_in_vocab = {k: v for k, v in vocab.items() if k.startswith(('VAR_', 'FUNC_'))}
+    if semantic_in_vocab:
+        print(f"\nSemantic tokens in vocabulary:")
+        var_count = len([k for k in semantic_in_vocab.keys() if k.startswith('VAR_')])
+        func_count = len([k for k in semantic_in_vocab.keys() if k.startswith('FUNC_')])
+        print(f"   VAR_ tokens: {var_count}")
+        print(f"   FUNC_ tokens: {func_count}")
+        print(f"   Total semantic: {len(semantic_in_vocab)}")
+    
     # Show problematic unknown tokens
     if unknown_counter:
-        print(f"\nTop unknown tokens (potential missed important ones):")
+        print(f"\nTop unknown tokens:")
         for token, count in unknown_counter.most_common(10):
-            token_type = "complex" if is_complex_identifier(token) else "simple"
+            token_type = "semantic" if token.startswith(('VAR_', 'FUNC_')) else "regular"
             noise_flag = " (noise)" if is_noise_token(token) else ""
             print(f"   '{token}': {count} ({token_type}){noise_flag}")
     
@@ -181,21 +198,20 @@ if __name__ == "__main__":
     output_dir = os.path.join(ROOT_DIR, "data", "preprocessed", "vocab")
     os.makedirs(output_dir, exist_ok=True)
     
-    # Input files
     files = [
         os.path.join(base_path, "train.jsonl"),
-        os.path.join(base_path, "val.jsonl")
+        os.path.join(base_path, "val.jsonl")    
     ]
     existing_files = [f for f in files if os.path.exists(f)]
     
     if not existing_files:
-        print(" No tokenized files found!")
-        print(" Please run tokenizer.py first!")
+        print("❌ No tokenized files found!")
+        print(f"   Expected files: {files}")
         exit(1)
     
     print(f"Found {len(existing_files)} input files")
 
-    # Build vocabulary
+    # Build vocabulary with semantic support
     vocab, token_counter = build_vocabulary(
         existing_files, 
         min_freq=2, 
@@ -205,13 +221,13 @@ if __name__ == "__main__":
     # Validate coverage
     coverage = validate_vocabulary_detailed(vocab, existing_files)
     
-    # Save vocabulary
+    # Save vocab file
     vocab_path = os.path.join(output_dir, "vocab.json")
     with open(vocab_path, 'w', encoding='utf-8') as f:
         json.dump(vocab, f, indent=2)
     
-    print(f"\nCompleted!")
+    print(f"\n✅ Vocabulary completed!")
     print(f"   Size: {len(vocab):,} tokens")
     print(f"   Coverage: {coverage:.2%}")
-    print(f"   Quality: HIGH (noise filtered)")
+    print(f"   Semantic tokens included: ✅")
     print(f"   Saved to: {vocab_path}")
