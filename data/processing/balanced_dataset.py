@@ -381,8 +381,8 @@ def main():
     print("=" * 80)
     
     # Configuration
-    input_file = "../../data/datasets/clean_diversevul_20230702.jsonl"
-    output_dir = "../../data/preprocessed/balanced_splits2"
+    input_file = "data/datasets/clean_diversevul_20230702.jsonl"
+    output_dir = "data/preprocessed/balanced_splits"
     
     # Set random seed for reproducibility
     random.seed(42)

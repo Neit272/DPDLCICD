@@ -21,3 +21,5 @@ torchaudio==2.6.0+cu118
 torchvision==0.21.0+cu118
 tqdm==4.67.1
 typing_extensions==4.13.2
+tensorflow
+tensorflow-addons

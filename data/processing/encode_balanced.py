@@ -111,7 +111,7 @@ def main():
     # Configuration - simplified vocab path
     token_dir = os.path.join(ROOT_DIR, "data", "preprocessed", "balanced_tokenized")
     output_dir = os.path.join(ROOT_DIR, "data", "preprocessed", "encoded_balanced")
-    vocab_path = os.path.join(ROOT_DIR, "data", "preprocessed", "vocab.json") 
+    vocab_path = os.path.join(ROOT_DIR, "data", "preprocessed", "vocab", "vocab.json") 
     
     # Check if balanced_tokenized directory exists
     if not os.path.exists(token_dir):

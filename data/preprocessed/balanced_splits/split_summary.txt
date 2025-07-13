@@ -1,0 +1,146 @@
+16 FILES BALANCED DATASET SPLIT SUMMARY
+================================================================================
+
+STRATEGY: 14 train + 1 val + 1 test files
+          Each file: 18,945 VUL + 18,945 NON-VUL (balanced 1:1)
+          VUL strategy: REPLICATED to all 16 files
+          NON-VUL strategy: DISTRIBUTED across all files (zero waste)
+          Extra NON-VUL: Distributed to train files
+================================================================================
+
+DATA UTILIZATION DETAILS:
+  Original VUL: 18,945 samples
+  Original NON-VUL: 311,547 samples
+  Original total: 330,492 samples
+  Generated samples: 614,667 samples
+  Files created: 16 files
+  Data utilization: 186.0%
+  Strategy: 16 FILES: VUL replicated 16 times, NON-VUL distributed ALL (zero waste)
+
+ALLOCATION DETAILS:
+  Total files: 16 (14 train + 1 val + 1 test)
+  VUL per file: 18,945 (replicated)
+  NON-VUL base per file: 18,945 (for 1:1 balance)
+  Extra NON-VUL per train: 601
+  Extra NON-VUL remainder: 13 (to first train files)
+  NON-VUL unused: 0 (ZERO WASTE)
+
+VAL FILE:
+  File: val_balanced.jsonl
+  Vulnerable: 18,945 (50.0%)
+  Non-vulnerable: 18,945 (50.0%)
+  Total: 37,890
+  Balance ratio: 1:1.0
+
+TEST FILE:
+  File: test_balanced.jsonl
+  Vulnerable: 18,945 (50.0%)
+  Non-vulnerable: 18,945 (50.0%)
+  Total: 37,890
+  Balance ratio: 1:1.0
+
+TRAIN FILES (14 files):
+  File 01 (train_balanced_01.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 02 (train_balanced_02.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 03 (train_balanced_03.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 04 (train_balanced_04.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 05 (train_balanced_05.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 06 (train_balanced_06.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 07 (train_balanced_07.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 08 (train_balanced_08.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 09 (train_balanced_09.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 10 (train_balanced_10.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 11 (train_balanced_11.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 12 (train_balanced_12.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 13 (train_balanced_13.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,547 (50.8%)
+    Total: 38,492
+    Balance ratio: 1:1.03
+
+  File 14 (train_balanced_14.jsonl):
+    Vulnerable: 18,945 (49.2%)
+    Non-vulnerable: 19,546 (50.8%)
+    Total: 38,491
+    Balance ratio: 1:1.03
+
+QUALITY CHECK:
+  Train files size uniformity:
+    Minimum size: 38,491
+    Maximum size: 38,492
+    Size difference: 1
+    Uniformity status: ✅ EXCELLENT
+  Data efficiency: 100% NON-VUL utilization (zero waste)
+  Balance quality: All files approximately 1:1 ratio
+
+OVERALL SUMMARY:
+  Total files: 16
+  Total samples: 614,667
+  Total VUL instances: 303,120 (replicated)
+  Total NON-VUL instances: 311,547 (distributed)
+  Original VUL: 18,945
+  Original NON-VUL: 311,547
+  VUL replication factor: 16
+  NON-VUL utilization: 100% (zero waste)
+  Strategy success: ✅ PERFECT BALANCE + ZERO WASTE
+  Quality status: ✅ ALL FILES BALANCED ~1:1 RATIO

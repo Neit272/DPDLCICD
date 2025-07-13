@@ -5,7 +5,7 @@ from collections import Counter
 from tqdm import tqdm
 
 # Import từ tokenizer2 thay vì tokenizer
-from tokenizer2 import (
+from data.processing.tokenizer import (
     CRITICAL_FUNCTIONS, C_KEYWORDS, C_TYPES, OPERATORS, 
     MEANINGFUL_IDENTIFIERS, is_complex_identifier, is_noise_token
 )
